@@ -2,26 +2,27 @@
 
 declare(strict_types=1);
 
-namespace AeonDigital\Interfaces\SimpleTypes;
+namespace AeonDigital\SimpleTypes\Types;
 
-use AeonDigital\RealType;
+use AeonDigital\Interfaces\SimpleTypes\iSimpleType as iSimpleType;
 use AeonDigital\SimpleTypes\Enums\PrimitiveType as PrimitiveType;
-
+use AeonDigital\Tools as Tools;
 
 
 
 
 
 /**
- * Interface fundamental para todas definições de tipos simples.
+ * Definições para o tipo ``DateTime``.
  *
  * @package     AeonDigital\SimpleTypes
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2023, Rianna Cantarelli
  * @license     MIT
  */
-interface iSimpleType
+final class TypeDateTime implements iSimpleType
 {
+
 
 
     /**
@@ -29,62 +30,21 @@ interface iSimpleType
      *
      * @var PrimitiveType
      */
-    public const TYPE = PrimitiveType::STRING;
+    public const TYPE = PrimitiveType::DATETIME;
 
     /**
      * Indica quando o tipo é representado por uma classe.
      *
      * @var bool
      */
-    public const IS_CLASS = false;
-
-    /**
-     * Indica quando o tipo é um numero.
-     *
-     * @var bool
-     */
-    public const IS_NUMERIC = false;
-
-    /**
-     * Indica quando trata-se de um valor numérico que ACEITA valores negativos.
-     * O valor ``null`` indica que esta informação não se aplica ao tipo.
-     *
-     * @var ?bool
-     */
-    public const SIGNED = null;
-
-    /**
-     * Indica quando trata-se de um valor numérico que NÃO ACEITA valores negativos.
-     * O valor ``null`` indica que esta informação não se aplica ao tipo.
-     *
-     * @var ?bool
-     */
-    public const UNSIGNED = null;
-
-    /**
-     * Representação em ``string`` do valor mínimo aceitável para este tipo.
-     * O valor ``null`` indica que esta informação não se aplica ao tipo.
-     *
-     * @var ?string
-     */
-    public const MIN = null;
-
-    /**
-     * Representação em ``string`` do valor máximo aceitável para este tipo.
-     * O valor ``null`` indica que esta informação não se aplica ao tipo.
-     *
-     * @var ?string
-     */
-    public const MAX = null;
+    public const IS_CLASS = true;
 
     /**
      * Representação em ``string`` do valor que o tipo deve considerar equivalente a ``null``.
      *
      * @var string
      */
-    public const NULL_EQUIVALENT = "";
-
-
+    public const NULL_EQUIVALENT = "0001-01-01 00:00:00";
 
 
 
@@ -92,22 +52,28 @@ interface iSimpleType
      * Retorna o valor indicado em ``MIN`` convertido para
      * o tipo nativo.
      *
-     * @return null|int|float|RealType|\DateTime
+     * @return null
      * Usado apenas para tipos Int, Float, Real e DateTime.
      * Retornará ``null`` para todos os demais.
      */
-    public static function getMin(): null|int|float|RealType|\DateTime;
+    public static function getMin(): null
+    {
+        return self::MIN;
+    }
 
 
     /**
      * Retorna o valor indicado em ``MAX`` convertido para
      * o tipo nativo.
      *
-     * @return null|int|float|RealType|\DateTime
+     * @return null
      * Usado apenas para tipos Int, Float, Real e DateTime.
      * Retornará ``null`` para todos os demais.
      */
-    public static function getMax(): null|int|float|RealType|\DateTime;
+    public static function getMax(): null
+    {
+        return self::MAX;
+    }
 
 
     /**
@@ -121,9 +87,12 @@ interface iSimpleType
      * - string -> ""
      * - array -> []
      *
-     * @return null|bool|int|float|RealType|\DateTime|string|array
+     * @return \DateTime
      */
-    public static function getNullEquivalent(): null|bool|int|float|RealType|\DateTime|string|array;
+    public static function getNullEquivalent(): \DateTime
+    {
+        return new \DateTime(self::NULL_EQUIVALENT);
+    }
 
 
     /**
@@ -135,7 +104,10 @@ interface iSimpleType
      *
      * @return bool
      */
-    public static function validate(mixed $v): bool;
+    public static function validate(mixed $v): bool
+    {
+        return (Tools::toDateTime($v) !== null);
+    }
 
 
     /**
@@ -145,11 +117,14 @@ interface iSimpleType
      * @param mixed $v
      * Valor que será convertido.
      *
-     * @return null|bool|int|float|RealType|\DateTime|string|array
+     * @return ?\DateTime
      * Retorna o valor equivalente ao originalmente passado ou, caso a conversão não
      * seja possível, retornará ``null``.
      */
-    public static function parseIfValidate(mixed $v): null|bool|int|float|RealType|\DateTime|string|array;
+    public static function parseIfValidate(mixed $v): ?\DateTime
+    {
+        return Tools::toDateTime($v);
+    }
 
 
     /**
@@ -161,5 +136,8 @@ interface iSimpleType
      * @return ?string
      * Caso não seja possível converter o valor, retornará ``null``.
      */
-    public static function toString(mixed $v): ?string;
+    public static function toString(mixed $v): ?string
+    {
+        return Tools::toDateTimeString($v);
+    }
 }
