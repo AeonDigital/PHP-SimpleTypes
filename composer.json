@@ -1,0 +1,28 @@
+{
+  "name": "aeondigital/phpsimpletypes",
+  "description": "Definição de tipos de dados simples.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rianna Cantarelli",
+      "email": "rianna.aeon@gmail.com",
+      "homepage": "http://aeondigital.com.br",
+      "role": "developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=8.2",
+    "aeondigital/phpinterfaces": "dev-php82"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9",
+    "aeondigital/phpdoc-to-rst": "master"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
