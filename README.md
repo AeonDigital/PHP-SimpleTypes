@@ -1,0 +1,2 @@
+# PHP-SimpleTypes
+Tipos simples
