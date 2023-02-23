@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AeonDigital\SimpleTypes\Types;
 
 use AeonDigital\Interfaces\SimpleTypes\iSimpleType as iSimpleType;
-use AeonDigital\SimpleTypes\Enums\PrimitiveType as PrimitiveType;
 use AeonDigital\Tools as Tools;
+
 
 
 
