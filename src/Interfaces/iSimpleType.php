@@ -15,7 +15,7 @@ use AeonDigital\SimpleTypes\Enums\PrimitiveType as PrimitiveType;
 /**
  * Interface fundamental para todas definições de tipos simples.
  *
- * @package     AeonDigital\SimpleTypes
+ * @package     AeonDigital\Interfaces\SimpleTypes
  * @author      Rianna Cantarelli <rianna@aeondigital.com.br>
  * @copyright   2023, Rianna Cantarelli
  * @license     MIT
